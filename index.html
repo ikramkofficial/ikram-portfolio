@@ -680,17 +680,28 @@
                 
                 // Show or hide demo link based on project data
                 const demoLink = document.getElementById('project-demo-link');
-                if(hasDemo) {
-                    demoLink.classList.remove('hidden');
-                    demoLink.classList.add('block');
-                } else {
-                    demoLink.classList.add('hidden');
-                    demoLink.classList.remove('block');
-                }
+
+if (hasDemo) {
+    demoLink.classList.remove('hidden');
+    demoLink.classList.add('block');
+
+    if (projectName === "Persona Assist") {
+        demoLink.href = "https://ikramkofficial.github.io/persona-assist/";
+    }
+} else {
+    demoLink.classList.add('hidden');
+    demoLink.classList.remove('block');
+    demoLink.href = "#";
+}
                 
                 // You can set actual links here later
-                document.getElementById('project-source-link').href = '#';
-                document.getElementById('project-license-link').href = '#';
+                if (projectName === "Persona Assist") {
+    document.getElementById('project-source-link').href = "https://github.com/ikramkofficial/persona-assist";
+    document.getElementById('project-license-link').href = "#";
+} else {
+    document.getElementById('project-source-link').href = "#";
+    document.getElementById('project-license-link').href = "#";
+}
 
                 const modalContent = projectModal.querySelector('.modal-content');
                 const modalOverlay = projectModal.querySelector('.modal-overlay');
