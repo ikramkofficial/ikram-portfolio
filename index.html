@@ -308,7 +308,7 @@
                 <!-- Project Card: Persona Assist -->
                 <div class="project-card bg-[#09090f] text-white rounded-2xl shadow-lg overflow-hidden fade-in-up border border-gray-800 flex flex-col">
                     <!-- Updated Image Source to use the local path provided -->
-                    <div class="w-full h-56 bg-[#171720] border-b border-gray-800 flex items-center justify-center overflow-hidden">
+                    <div class="w-full h-52 bg-[#171720] border-b border-gray-800 flex items-center justify-center overflow-hidden">
     <img 
         src="assets/icon/2.png" 
         alt="Persona Assist Project" 
@@ -357,7 +357,14 @@
                 <!-- Project Card: PennyWise -->
                 <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden fade-in-up flex flex-col" style="transition-delay: 400ms;">
                     <!-- Add your local picture path to src, e.g., src="assets/pennywise.jpg" -->
-                    <img src="assets/pennywise-pic.jpg" alt="PennyWise Project" onerror="this.src='https://placehold.co/600x400/10B981/FFFFFF?text=PennyWise+Picture'" class="w-full h-48 object-cover border-b border-gray-100">
+                    <div class="w-full h-48 bg-white border-b border-gray-100 flex items-center justify-center overflow-hidden">
+    <img 
+        src="assets/icon/3.jpg" 
+        alt="PennyWise Expense Tracker Logo" 
+        onerror="this.src='https://placehold.co/600x400/10B981/FFFFFF?text=PennyWise'" 
+        class="h-full w-full object-contain p-5"
+    >
+</div>
                     <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-gray-800">PennyWise: Expense Tracker</h3>
                         <p class="text-gray-600 mb-4 text-sm flex-grow">An intelligent expense tracker designed to help users monitor their spending, reduce unnecessary costs, and achieve financial goals. Integrates with merchants for exclusive discounts.</p>
@@ -368,9 +375,13 @@
                             <li>Multi-language User Interface</li>
                             <li>Collaborative Discount System</li>
                         </ul>
-                         <button class="get-project-btn text-blue-500 font-semibold hover:underline mt-4 inline-block text-left" data-project-name="PennyWise">Explore Project &rarr;</button>
-                    </div>
-                </div>
+                        <button 
+            class="get-project-btn text-blue-500 font-semibold hover:text-white transition-colors mt-4 inline-block text-left" 
+            data-project-name="PennyWise" 
+            data-live-demo="true"
+        >
+            Explore Project &rarr;
+        </button>
             </div>
         </section>
         
@@ -675,54 +686,62 @@
         
         setupModal('service-modal', [], '.close-modal-btn');
 
-        // --- Project Modal Logic ---
-        const projectModal = document.getElementById('project-modal');
-        const projectModalTitle = document.getElementById('project-modal-title');
-        
-        document.querySelectorAll('.get-project-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const projectName = button.dataset.projectName;
-                const hasDemo = button.dataset.liveDemo === "true";
-                
-                projectModalTitle.textContent = `${projectName} - Options`;
-                
-                // Show or hide demo link based on project data
-                const demoLink = document.getElementById('project-demo-link');
+// --- Project Modal Logic ---
+const projectModal = document.getElementById('project-modal');
+const projectModalTitle = document.getElementById('project-modal-title');
 
-if (hasDemo) {
-    demoLink.classList.remove('hidden');
-    demoLink.classList.add('block');
+document.querySelectorAll('.get-project-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const projectName = button.dataset.projectName;
+        const hasDemo = button.dataset.liveDemo === "true";
 
-    if (projectName === "Persona Assist") {
-        demoLink.href = "https://ikramkofficial.github.io/persona-assist/";
-    }
-} else {
-    demoLink.classList.add('hidden');
-    demoLink.classList.remove('block');
-    demoLink.href = "#";
-}
-                
-                // You can set actual links here later
-                if (projectName === "Persona Assist") {
-    document.getElementById('project-source-link').href = "https://github.com/ikramkofficial/persona-assist";
-   document.getElementById('project-license-link').href = "https://github.com/ikramkofficial/persona-assist/blob/main/LICENSE";
-} else {
-    document.getElementById('project-source-link').href = "#";
-    document.getElementById('project-license-link').href = "#";
-}
+        projectModalTitle.textContent = `${projectName} - Options`;
 
-                const modalContent = projectModal.querySelector('.modal-content');
-                const modalOverlay = projectModal.querySelector('.modal-overlay');
-                projectModal.classList.remove('hidden');
-                setTimeout(() => {
-                    modalOverlay.classList.remove('opacity-0');
-                    modalContent.classList.remove('opacity-0', 'scale-95');
-                }, 10);
-            });
-        });
+        // Show or hide demo link based on project data
+        const demoLink = document.getElementById('project-demo-link');
+        const sourceLink = document.getElementById('project-source-link');
+        const licenseLink = document.getElementById('project-license-link');
 
-        setupModal('project-modal', [], '.close-modal-btn');
+        if (hasDemo) {
+            demoLink.classList.remove('hidden');
+            demoLink.classList.add('block');
 
+            if (projectName === "Persona Assist") {
+                demoLink.href = "https://ikramkofficial.github.io/persona-assist/";
+            } else if (projectName === "PennyWise") {
+                demoLink.href = "https://ikramkofficial.github.io/PennyWise/";
+            }
+        } else {
+            demoLink.classList.add('hidden');
+            demoLink.classList.remove('block');
+            demoLink.href = "#";
+        }
+
+        // Project source and license/certificate links
+        if (projectName === "Persona Assist") {
+            sourceLink.href = "https://github.com/ikramkofficial/persona-assist";
+            licenseLink.href = "https://github.com/ikramkofficial/persona-assist/blob/main/LICENSE";
+        } else if (projectName === "PennyWise") {
+            sourceLink.href = "https://github.com/ikramkofficial/PennyWise";
+            licenseLink.href = "https://github.com/ikramkofficial/PennyWise/blob/main/LICENSE";
+        } else {
+            sourceLink.href = "#";
+            licenseLink.href = "#";
+        }
+
+        const modalContent = projectModal.querySelector('.modal-content');
+        const modalOverlay = projectModal.querySelector('.modal-overlay');
+
+        projectModal.classList.remove('hidden');
+
+        setTimeout(() => {
+            modalOverlay.classList.remove('opacity-0');
+            modalContent.classList.remove('opacity-0', 'scale-95');
+        }, 10);
+    });
+});
+
+setupModal('project-modal', [], '.close-modal-btn');
 
         // --- Animated Background Canvas ---
         const canvas = document.getElementById('bg-canvas');
